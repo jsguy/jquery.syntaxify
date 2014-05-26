@@ -12,7 +12,7 @@ $.fn.syntaxify = function(selector, args){
 			  .replace(/'/g, "&#039;");
 		},
 		options = {
-			language: 'html'
+			language: 'markup'
 		};
 	args = args || {};
 	$.extend(options, args);
@@ -24,13 +24,11 @@ $.fn.syntaxify = function(selector, args){
 };
 
 $(function(){
-	$('#codeOut').syntaxify('#buttonLinkExample', { language: "markup" });
-
 	$('[data-syntaxify]').each(function(idx,el){
 		var $el = $(el),
 			target = $el.data('syntaxify'),
 			options = {
-				language: $el.data('syntaxify-language') || 'html'
+				language: $el.data('syntaxify-language') || 'markup'
 			};
 		$el.syntaxify(target, options);
 	});

@@ -40,6 +40,11 @@ a.btn_link {
 
     <!-- This shows the HTML, and is set by JS code -->
     <div id="codeOut"></div>
+    <script>
+        $(function(){
+            $('#codeOut').syntaxify('#buttonLinkExample', { language: "markup" });
+        });
+    </script>
 
     <!-- This shows the CSS, and is set using data attributes -->
     <div data-syntaxify="#buttonLinkStyling" data-syntaxify-language="css"></div>
