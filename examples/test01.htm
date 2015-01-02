@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="prism.min.css">
-    <script type="text/javascript" src="/libs/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="prism.min.js"></script>
-    <script type="text/javascript" src="jquery.syntaxify.js"></script>
+    <link rel="stylesheet" type="text/css" href="../prism/prism.min.css">
+    <script type="text/javascript" src="../jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="../prism/prism.min.js"></script>
+    <script type="text/javascript" src="../jquery.syntaxify.js"></script>
     <style>
         pre[class*="language-"] { border-radius: 2px; }
     </style>
@@ -38,6 +38,12 @@ a.btn_link {
         <a href="#" class="btn_link">Hello</a>
     </div>
 
+    <script id="buttonLinkCodeExample">
+$(".btn_link").click(function(){
+    $(this).text("World");
+});
+    </script>
+
     <!-- This shows the HTML, and is set by JS code -->
     <div id="codeOut"></div>
     <script>
@@ -48,6 +54,10 @@ a.btn_link {
 
     <!-- This shows the CSS, and is set using data attributes -->
     <div data-syntaxify="#buttonLinkStyling" data-syntaxify-language="css"></div>
+
+    <!-- This shows the JS, and is set using data attributes -->
+    <div data-syntaxify="#buttonLinkCodeExample" data-syntaxify-language="javascript"></div>
+    
     
 </body>
 </html>

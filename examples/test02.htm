@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../prism/prism.min.css">
+    <script type="text/javascript" src="../jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="../prism/prism.min.js"></script>
+    <script type="text/javascript" src="../jquery.syntaxify.js"></script>
+    <style>
+        pre[class*="language-"] { border-radius: 2px; }
+    </style>
+</head>
+<body>
+
+    <style id="buttonLinkStyling">
+a.btn_link {
+    background-color: #fa6705;
+    border: 1px solid #da5700;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Arial,Verdana,Helvetica,Sans-Serif;
+    font-size: 1em;
+    font-weight: normal;
+    line-height: 1.4em;
+    outline: medium none;
+    overflow: visible;
+    padding: 0.3em 1.2em;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
+    vertical-align: middle;
+}
+    </style>
+
+    <div id="buttonLinkExample">
+        <a href="#" class="btn_link">Hello</a>
+    </div>
+
+    <div style="display:none" id="test"></div>
+
+    <script id="buttonLinkCodeExample">
+$(".btn_link").click(function(e){
+    $(this).text("World");
+    e.preventDefault();
+});
+    </script>
+
+    <!-- This shows the HTML, and is set by JS code -->
+    <div id="codeOut"></div>
+    <script>
+        $(function(){
+            $('#codeOut').syntaxify('#buttonLinkExample', { language: "markup" });
+        });
+    </script>
+
+    <!-- This shows the CSS, and is set using data attributes -->
+    <div data-syntaxify="#buttonLinkStyling" data-syntaxify-language="css"></div>
+
+    <!-- This shows the JS, and is set using data attributes -->
+    <div data-syntaxify="#buttonLinkCodeExample" data-syntaxify-language="javascript"></div>
+    
+    <!-- This shows some CSS loaded externally, and is set using data attributes -->
+    <div data-syntaxify-src="http://localhost/projects/jquery.syntaxify/prism/prism.js" data-syntaxify-language="javascript"></div>
+
+    
+</body>
+</html>
