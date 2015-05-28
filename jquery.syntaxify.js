@@ -21,13 +21,20 @@
 		$.extend(options, args);
 
 		$this.each(function(idx,el){
-			var $el = $(el);
+			var $el = $(el),
+				annotations;
+
+			if($el.data('annotations')) {
+				annotations = $el.data('annotations')
+			}
+
 			$el.html(
-				'<pre class="syntaxifyCode">'+
+				'<pre class="syntaxifyCode language-'+options.language+'" '+(annotations? 'data-annotations="' + annotations + '"': "")+'>'+
 					'<code class="language-'+options.language+'">'+
 						$.trim(escapeHtml($(selector).html()))+
 					'</code>'+
 				'</pre>');
+			Prism.highlightElement($el.find('pre.syntaxifyCode code').get(0));
 		});
 	};
 
