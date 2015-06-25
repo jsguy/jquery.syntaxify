@@ -4,21 +4,26 @@
 
 	//  Ref: http://stackoverflow.com/questions/332872/how-to-encode-a-url-in-javascript
  	var	escapeHtml = function(text) {
-		return text
-			.replace(/&/g, "&amp;")
-			.replace(/</g, "&lt;")
-			.replace(/>/g, "&gt;")
-			.replace(/"/g, "&quot;")
-			.replace(/'/g, "&#039;");
-	};
+			return text
+				.replace(/&/g, "&amp;")
+				.replace(/</g, "&lt;")
+				.replace(/>/g, "&gt;")
+				.replace(/"/g, "&quot;")
+				.replace(/'/g, "&#039;");
+		},
+		getOptions = function($el){
+			var language = $el.data('syntaxify-language');
+			return language? {language: language}: {};
+		};
 
 	$.fn.syntaxify = function(selector, args){
 		var $this = $(this),
+			$el = $(selector),
 			options = {
 				language: 'markup'
 			};
 		args = args || {};
-		$.extend(options, args);
+		$.extend(options, getOptions($el), args);
 
 		$this.each(function(idx,el){
 			var $el = $(el),
@@ -31,9 +36,10 @@
 			$el.html(
 				'<pre class="syntaxifyCode language-'+options.language+'" '+(annotations? 'data-annotations="' + annotations + '"': "")+'>'+
 					'<code class="language-'+options.language+'">'+
-						$.trim(escapeHtml($(selector).html()))+
+						$.trim(escapeHtml($el.html()))+
 					'</code>'+
-				'</pre>');
+				'</pre>'
+			);
 			Prism.highlightElement($el.find('pre.syntaxifyCode code').get(0));
 		});
 	};
@@ -42,21 +48,15 @@
 	$(function(){
 		$('[data-syntaxify]').each(function(idx,el){
 			var $el = $(el),
-				target = $el.data('syntaxify'),
-				options = {
-					language: $el.data('syntaxify-language') || 'markup'
-				};
-			$el.syntaxify(target, options);
+				target = $el.data('syntaxify');
+			$el.syntaxify(target, getOptions($el));
 		});
 		$('[data-syntaxify-src]').each(function(idx,el){
 			var $el = $(el),
 				url = $el.data('syntaxify-src'),
-				options = {
-					language: $el.data('syntaxify-language') || 'markup'
-				};
+				options = getOptions($el);
 			(function(url, $el, options){
 				$.get(url, function(data){
-					//console.log(data);
 					$('#test').html(escapeHtml(data));
 					$el.syntaxify($('#test'), options);
 				});
