@@ -18,16 +18,17 @@
 
 	$.fn.syntaxify = function(selector, args){
 		var $this = $(this),
-			$el = $(selector),
+			$selectedEl = $(selector),
 			options = {
 				language: 'markup'
 			};
 		args = args || {};
-		$.extend(options, getOptions($el), args);
+		$.extend(options, getOptions($selectedEl), args);
 
 		$this.each(function(idx,el){
 			var $el = $(el),
-				annotations;
+				annotations,
+				html = $.trim(escapeHtml($selectedEl.html()));
 
 			if($el.data('annotations')) {
 				annotations = $el.data('annotations')
@@ -36,7 +37,7 @@
 			$el.html(
 				'<pre class="syntaxifyCode language-'+options.language+'" '+(annotations? 'data-annotations="' + annotations + '"': "")+'>'+
 					'<code class="language-'+options.language+'">'+
-						$.trim(escapeHtml($el.html()))+
+						html+
 					'</code>'+
 				'</pre>'
 			);
